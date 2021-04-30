@@ -8,6 +8,7 @@ public class KeypadController : MonoBehaviour
     public DoorController door;
     public string password;
     public int passwordLimit;
+    public Outline outline;
     public Text passwordText;
 
     [Header("Audio")]
@@ -51,7 +52,7 @@ public class KeypadController : MonoBehaviour
         if (passwordText.text == password)
         {
             door.lockedByPassword = false;
-
+            outline.OutlineColor = Color.green;
             if (audioSource != null)
                 audioSource.PlayOneShot(correctSound);
 

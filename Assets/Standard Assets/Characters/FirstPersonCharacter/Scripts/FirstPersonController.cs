@@ -32,6 +32,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
+        public bool canMove;
         private Vector2 m_Input;
         private Vector3 m_MoveDir = Vector3.zero;
         private CharacterController m_CharacterController;
@@ -54,6 +55,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_StepCycle = 0f;
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
+            canMove = true;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
         }
@@ -126,12 +128,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
             }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
+            
+            if (canMove)
+            {
+                m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+                ProgressStepCycle(speed);
+                UpdateCameraPosition(speed);
 
-            ProgressStepCycle(speed);
-            UpdateCameraPosition(speed);
-
-            m_MouseLook.UpdateCursorLock();
+                m_MouseLook.UpdateCursorLock();
+            }
         }
 
 
@@ -144,20 +149,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void ProgressStepCycle(float speed)
         {
-            if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
-            {
-                m_StepCycle += (m_CharacterController.velocity.magnitude + (speed*(m_IsWalking ? 1f : m_RunstepLenghten)))*
-                             Time.fixedDeltaTime;
-            }
 
-            if (!(m_StepCycle > m_NextStep))
-            {
-                return;
-            }
+                if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
+                {
+                    m_StepCycle += (m_CharacterController.velocity.magnitude + (speed*(m_IsWalking ? 1f : m_RunstepLenghten)))*
+                                 Time.fixedDeltaTime;
+                }
 
-            m_NextStep = m_StepCycle + m_StepInterval;
+                if (!(m_StepCycle > m_NextStep))
+                {
+                    return;
+                }
 
-            PlayFootStepAudio();
+                m_NextStep = m_StepCycle + m_StepInterval;
+
+                PlayFootStepAudio();
         }
 
 

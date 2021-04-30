@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class DialogueManager : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class DialogueManager : MonoBehaviour {
 	public Text dialogueText;
 
 	public Animator animator;
+	public FirstPersonController firstPersonController;
 
 	private Queue<string> sentences;
 
@@ -21,7 +23,8 @@ public class DialogueManager : MonoBehaviour {
 	{
 		animator.SetBool("IsOpen", true);
 
-	
+
+		firstPersonController.canMove = false;
 
 		sentences.Clear();
 
@@ -59,6 +62,7 @@ public class DialogueManager : MonoBehaviour {
 	void EndDialogue()
 	{
 		animator.SetBool("IsOpen", false);
+		firstPersonController.canMove = true;
 	}
 
 }

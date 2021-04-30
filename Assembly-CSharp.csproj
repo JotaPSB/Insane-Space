@@ -64,6 +64,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CursorsAndCrosshairs\CursorChanger.cs" />
+    <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -76,10 +78,15 @@
     <Compile Include="Assets\Scripts\DialogueController.cs" />
     <Compile Include="Assets\Scripts\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
+    <Compile Include="Assets\Scripts\DocumentController.cs" />
     <Compile Include="Assets\Scripts\DoorController.cs" />
+    <Compile Include="Assets\Scripts\Key.cs" />
     <Compile Include="Assets\Scripts\KeypadController.cs" />
     <Compile Include="Assets\Scripts\KeypadKey.cs" />
     <Compile Include="Assets\Scripts\PlayerAim.cs" />
+    <None Include="Assets\QuickOutline\Resources\Shaders\OutlineFill.shader" />
+    <None Include="Assets\QuickOutline\Readme.txt" />
+    <None Include="Assets\QuickOutline\Resources\Shaders\OutlineMask.shader" />
     <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>E:/Insane Space Project/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>

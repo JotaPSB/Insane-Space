@@ -10,8 +10,7 @@ public class PlayerAim : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, headPos.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-            Debug.DrawRay(headPos.position, headPos.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-
+  
             float distance = Vector3.Distance(transform.position, hit.transform.position);
             if (distance <= 3f)
             {
@@ -21,9 +20,16 @@ public class PlayerAim : MonoBehaviour
                     {
                         hit.transform.GetComponent<KeypadKey>().SendKey();
                     }
-                    else if(hit.transform.name=="Panel1" || hit.transform.name == "Panel2")
+                    else if(hit.transform.name=="Panel1" || hit.transform.name == "Panel2" || hit.transform.name == "Drawer")
                     {
                         hit.transform.GetComponentInParent<DoorController>().OpenClose();
+                    }
+                    else if (hit.transform.name == "Document")
+                    {
+                        hit.transform.GetComponent<DocumentController>().OpenDocument();
+                    }else if (hit.transform.name == "Key")
+                    {
+                        hit.transform.GetComponent<Key>().PickTheKey();
                     }
                 }
             }
